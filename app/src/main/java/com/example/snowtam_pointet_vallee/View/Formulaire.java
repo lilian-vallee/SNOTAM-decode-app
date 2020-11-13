@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.snowtam_pointet_vallee.Controller.FormController;
 import com.example.snowtam_pointet_vallee.R;
 
 public class Formulaire extends AppCompatActivity {
@@ -25,6 +26,8 @@ public class Formulaire extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulaire);
 
+        FormController controller = new FormController(this);
+
         airport1 = findViewById(R.id.airport1);
         airport2 = findViewById(R.id.airport2);
         airport3 = findViewById(R.id.airport3);
@@ -34,8 +37,7 @@ public class Formulaire extends AppCompatActivity {
         show_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goto_result = new Intent(getApplicationContext(),ResultPage.class);
-                startActivity(goto_result);
+                
             }
         });
 
