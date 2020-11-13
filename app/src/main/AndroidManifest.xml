@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SnowTam_Pointet_Vallee">
-        <activity android:name=".ResultPage"></activity>
-        <activity android:name=".Formulaire" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".View.ResultPage"></activity>
+        <activity android:name=".View.Formulaire" />
+        <activity android:name=".View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
