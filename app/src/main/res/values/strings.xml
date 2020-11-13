@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SnowTam_Pointet_Vallee</string>
     <string name="hello">hello</string>
+    <string name="new_form">new form</string>
 </resources>

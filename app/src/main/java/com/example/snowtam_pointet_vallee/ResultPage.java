@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class resultpage extends AppCompatActivity {
+public class ResultPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
