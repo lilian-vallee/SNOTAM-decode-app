@@ -1,1 +1,1 @@
-# SNOTAM-decode-app
+# SNOWTAM-decode-app
