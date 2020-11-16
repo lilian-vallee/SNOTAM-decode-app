@@ -8,39 +8,43 @@ import java.util.ArrayList;
 public class FormController {
 
     private Formulaire formPage;
-    private ArrayList airportsList;
+    private ArrayList<CharSequence> airportsList;
     private SnowtamAPI snowtamAPI;
+    private ArrayList<String> requestList;
 
     public FormController(Formulaire formPage){
         this.formPage = formPage;
     }
 
     public void RequeteAPI() {
-        //take the list and make requete
+        for (int i=0; i > airportsList.size(); i++){
+            String request = "https://applications.icao.int/dataservices/api/notams-realtime-list?api_key=19569950-27e2-11eb-bb91-378bd10b6324&format=json&criticality=1&locations="+ airportsList.get(i);
+            requestList.add(request);
+        }
+        snowtamAPI = new SnowtamAPI();
+        snowtamAPI.Request(requestList);
     }
 
 
-    public void addAirport(CharSequence text) {
-        //Check Airport validity
-        //add airportList
-    }
-
-    public boolean CheckAirportValidity(){
-        //Check code airport
-        if(){
+    public boolean addAirport(CharSequence airport) {
+        if(CheckAirportValidity(airport)) {
+            airportsList.add(airport);
             return true;
         }
         return false;
+    }
+
+    public boolean CheckAirportValidity(CharSequence airport) {
+        if (airport.length() == 4) {
+            if (airport.charAt(0) != 'i')
+                if (airport.charAt(0) != 'j')
+                    if (airport.charAt(0) != 'x')
+                        return true;
+        }
+        return false;
+    }
 
     public ArrayList getAirportsList() {
         return airportsList;
-    }
-
-    public void setAirportsList(ArrayList code) {
-            airportsList.add(code);
-        }
-
-
-
     }
 }
