@@ -19,6 +19,7 @@ public class FormController {
         //take the list and make requete
     }
 
+
     public void addAirport(CharSequence text) {
         //Check Airport validity
         //add airportList
@@ -30,5 +31,16 @@ public class FormController {
             return true;
         }
         return false;
+
+    public ArrayList getAirportsList() {
+        return airportsList;
+    }
+
+    public void setAirportsList(ArrayList code) {
+            airportsList.add(code);
+        }
+        
+
+
     }
 }
