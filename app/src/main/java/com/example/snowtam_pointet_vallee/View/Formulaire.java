@@ -27,6 +27,8 @@ public class Formulaire extends AppCompatActivity {
 
     Intent formulaire = getIntent();
 
+    TextView airport;
+
     ImageButton show_result;
     ImageButton addAirport;
 
@@ -48,6 +50,8 @@ public class Formulaire extends AppCompatActivity {
 
         FormController controller = new FormController(this);
 
+        airport = findViewById(R.id.airport1);
+
 
         show_result = findViewById(R.id.button_showResult);
         addAirport = findViewById(R.id.button_addAirport);
@@ -56,7 +60,7 @@ public class Formulaire extends AppCompatActivity {
         addAirport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                controller.addAirport(airport.getText());
             }
         });
 
@@ -66,11 +70,7 @@ public class Formulaire extends AppCompatActivity {
 
                 //method getAirportData => List(codeAirports)
 
-                controller.addAirport(getAirportData());
                 controller.RequeteAPI();
-
-
-
 
             }
         });
