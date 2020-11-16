@@ -13,6 +13,8 @@ import com.example.snowtam_pointet_vallee.R;
 
 public class Formulaire extends AppCompatActivity {
 
+    FormController controller = new FormController(this);
+
     Intent formulaire = getIntent();
     TextView airport1;
     TextView airport2;
@@ -37,9 +39,13 @@ public class Formulaire extends AppCompatActivity {
         show_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                controller.addAirport(airport1.getText());//dynamique?
+                controller.RequeteAPI();
             }
         });
+
+        //listener unfocus les saisies des Aéroports pour check validité (methode : controller.CheckAirportValidity() )
+        // non valide => champ de saisie rouge
 
     }
 }
