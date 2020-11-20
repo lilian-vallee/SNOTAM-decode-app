@@ -47,8 +47,6 @@ public class Formulaire extends AppCompatActivity {
 
         showCode = findViewById(R.id.afficheText);
 
-        showCode.setText("");
-
         show_result = findViewById(R.id.button_showResult);
         addAirport = findViewById(R.id.button_addAirport);
 
@@ -58,8 +56,8 @@ public class Formulaire extends AppCompatActivity {
             public void onClick(View v) {
                 CharSequence airportCode = airport.getText();
                 if(controller.addAirport(airportCode)){
-                    airport.clearComposingText();
-                    showCode.setText((String) showCode.getText() + airportCode);
+                    airport.setText("");
+                    showCode.setText((String) showCode.getText() + '\n' + airportCode);
                 }
                 else {
                     Context context = getApplicationContext();

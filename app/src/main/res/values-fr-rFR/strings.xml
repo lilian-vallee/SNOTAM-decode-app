@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources><string name="app_name">SnowTam_Pointet_Vallee</string>
+    <string name="hello">bonjour</string>
+    <string name="new_form">nouvelle entrée</string>
+    <string name="airport_number">code aeroport</string>
+    <string name="registerCodes">numero enregistrés</string>
+</resources>

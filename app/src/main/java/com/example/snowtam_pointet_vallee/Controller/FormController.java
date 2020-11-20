@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class FormController {
 
     private Formulaire formPage;
-    private ArrayList<CharSequence> airportsList;
+    private ArrayList<CharSequence> airportsList = new ArrayList<>();
     private SnowtamAPI snowtamAPI;
     private ArrayList<String> requestList;
 
