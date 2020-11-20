@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.autofill.AutofillId;
@@ -60,6 +61,7 @@ public class Formulaire extends AppCompatActivity {
                     airport.setText("");                                //reset the view on 'airport'
                     showCode.setText((String) showCode.getText() + '\n' + airportCode);
                                                                         //add and show the new code
+                    airport.setTextColor(Color.BLACK);                  //code is ok so reset text color to black
                 }
                 else {                                                  //if check isn't ok
                     Context context = getApplicationContext();
@@ -70,6 +72,8 @@ public class Formulaire extends AppCompatActivity {
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+
+                    airport.setTextColor(Color.RED);                    //text color to red => warning there is an error
 
                 }
             }
@@ -82,8 +86,6 @@ public class Formulaire extends AppCompatActivity {
             }
         });
 
-        //listener unfocus les saisies des Aéroports pour check validité (methode : controller.CheckAirportValidity() )
-        // non valide => champ de saisie rouge
 
     }
 }
