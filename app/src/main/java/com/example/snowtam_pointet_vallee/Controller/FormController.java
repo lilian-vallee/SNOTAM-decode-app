@@ -27,13 +27,16 @@ public class FormController {
     }
 
     public void RequeteAPI() {
+
         System.out.println("setup request");
         requests = new String[airportsList.size()];
+
         for (int i=0; i < airportsList.size(); i++){
             String request = "https://applications.icao.int/dataservices/api/notams-realtime-list?api_key=19569950-27e2-11eb-bb91-378bd10b6324&format=json&criticality=1&locations="+ airportsList.get(i);
             requests[i] = request;
             System.out.println(request);
         }
+
         snowtamAPI = new SnowtamAPI();
         snowtamAPI.Request(requests);
         //switch activity
