@@ -11,68 +11,24 @@
         android:id="@+id/airport1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/airport_number"
-        app:layout_constraintBottom_toBottomOf="@id/airport2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/airport2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
         android:inputType="textPersonName"
-        android:hint="@string/airport_number"
-        app:layout_constraintBottom_toBottomOf="@id/airport3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/airport1"
-        tools:ignore="MissingConstraints"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/airport3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/airport_number"
-        app:layout_constraintBottom_toBottomOf="@id/airport4"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/airport2"
-        tools:ignore="MissingConstraints"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/airport4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/airport_number"
         app:layout_constraintBottom_toBottomOf="@id/button_addAirport"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/airport3"
-        tools:ignore="MissingConstraints"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/button_addAirport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:layout_constraintBottom_toBottomOf="@id/button_showResult"
+        app:layout_constraintBottom_toBottomOf="@id/afficheText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/airport4"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="@id/airport1"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <ImageButton
         android:id="@+id/button_showResult"
@@ -82,8 +38,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/button_addAirport"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="@id/afficheText" />
+
+    <TextView
+        android:id="@+id/afficheText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@id/button_showResult"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/button_addAirport" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

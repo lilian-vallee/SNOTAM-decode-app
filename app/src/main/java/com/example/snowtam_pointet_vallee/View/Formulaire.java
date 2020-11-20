@@ -2,6 +2,7 @@ package com.example.snowtam_pointet_vallee.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.autofill.AutofillId;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.snowtam_pointet_vallee.Controller.FormController;
 import com.example.snowtam_pointet_vallee.R;
@@ -29,29 +31,23 @@ public class Formulaire extends AppCompatActivity {
 
     TextView airport;
 
+    TextView showCode;
+
     ImageButton show_result;
     ImageButton addAirport;
-
-    public ArrayList getAirportData () {
-
-        codeAirport.add(findViewById(R.id.airport1));
-        codeAirport.add(findViewById(R.id.airport2));
-        codeAirport.add(findViewById(R.id.airport3));
-        codeAirport.add(findViewById(R.id.airport4));
-        return codeAirport;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulaire);
 
-        int id = 0;
-
         FormController controller = new FormController(this);
 
         airport = findViewById(R.id.airport1);
 
+        showCode = findViewById(R.id.afficheText);
+
+        showCode.setText("");
 
         show_result = findViewById(R.id.button_showResult);
         addAirport = findViewById(R.id.button_addAirport);
@@ -60,18 +56,29 @@ public class Formulaire extends AppCompatActivity {
         addAirport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.addAirport(airport.getText());
+                CharSequence airportCode = airport.getText();
+                if(controller.addAirport(airportCode)){
+                    airport.clearComposingText();
+                    showCode.setText((String) showCode.getText() + airportCode);
+                }
+                else {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Le code " +
+                            airportCode +
+                            " n'est pas valide";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                }
             }
         });
 
         show_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //method getAirportData => List(codeAirports)
-
                 controller.RequeteAPI();
-
             }
         });
 
