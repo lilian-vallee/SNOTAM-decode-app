@@ -23,26 +23,25 @@ import java.util.StringTokenizer;
 
 public class Formulaire extends AppCompatActivity {
 
-    FormController controller = new FormController(this);
-
-    ArrayList codeAirport = new ArrayList();
+    FormController controller = new FormController(this);                                   //create the controller
 
     Intent formulaire = getIntent();
 
-    TextView airport;
+    TextView airport;           //where the user write the airport's code he wants
 
-    TextView showCode;
+    TextView showCode;          //where the user read the codes he already wrote
 
-    ImageButton show_result;
-    ImageButton addAirport;
+    ImageButton show_result;    //go to the next page whit results
+    ImageButton addAirport;     //add the code to a list which is used to show results
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulaire);
 
-        FormController controller = new FormController(this);
-
+        /***
+         * we use the findViewById method to link the xml object whit the code
+         */
         airport = findViewById(R.id.airport1);
 
         showCode = findViewById(R.id.afficheText);
@@ -51,15 +50,18 @@ public class Formulaire extends AppCompatActivity {
         addAirport = findViewById(R.id.button_addAirport);
 
 
-        addAirport.setOnClickListener(new View.OnClickListener() {
+        addAirport.setOnClickListener(new View.OnClickListener() {      //click on the button +
             @Override
             public void onClick(View v) {
-                CharSequence airportCode = airport.getText();
-                if(controller.addAirport(airportCode)){
-                    airport.setText("");
+                CharSequence airportCode = airport.getText();           //get the code the user put on 'airport'
+
+                //check the validity of the code
+                if(controller.addAirport(airportCode)){                 //if check is ok
+                    airport.setText("");                                //reset the view on 'airport'
                     showCode.setText((String) showCode.getText() + '\n' + airportCode);
+                                                                        //add and show the new code
                 }
-                else {
+                else {                                                  //if check isn't ok
                     Context context = getApplicationContext();
                     CharSequence text = "Le code " +
                             airportCode +
@@ -73,7 +75,7 @@ public class Formulaire extends AppCompatActivity {
             }
         });
 
-        show_result.setOnClickListener(new View.OnClickListener() {
+        show_result.setOnClickListener(new View.OnClickListener() {     //click on the button V
             @Override
             public void onClick(View v) {
                 controller.RequeteAPI();
