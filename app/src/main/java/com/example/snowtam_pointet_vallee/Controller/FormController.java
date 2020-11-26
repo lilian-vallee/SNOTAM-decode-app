@@ -38,9 +38,9 @@ public class FormController {
         }
 
         snowtamAPI = new SnowtamAPI();
-        snowtamAPI.Request(requests, formPage.getApplicationContext());
+        //snowtamAPI.Request(requests, formPage.getApplicationContext());
+        snowtamAPI.RequestTest(formPage.getApplicationContext());
         //switch activity
-
     }
 
 
