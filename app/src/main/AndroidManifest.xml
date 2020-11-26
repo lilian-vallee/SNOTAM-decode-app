@@ -11,10 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SnowTam_Pointet_Vallee">
-        <activity
-            android:name=".View.ResultPage"
-            android:theme="@style/Theme.SnowTam_Pointet_Vallee.slidr">
-        </activity>
+        <activity android:name=".View.ResultPage"></activity>
         <activity android:name=".View.Formulaire" />
         <activity android:name=".View.MainActivity">
             <intent-filter>
