@@ -1,14 +1,12 @@
 package com.example.snowtam_pointet_vallee.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.snowtam_pointet_vallee.Model.Snowtam;
 import com.example.snowtam_pointet_vallee.R;
-import com.google.android.material.tabs.TabLayout;
 
 public class ResultPage extends AppCompatActivity {
 
