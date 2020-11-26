@@ -22,11 +22,32 @@ import java.util.HashMap;
 
 public class SnowtamAPI {
 
+    //=====================================
+    //Attributs
+    //=====================================
     private HashMap<Integer,Snowtam> answers = new HashMap<>();
 
-    public SnowtamAPI() {
-    }
+    //=====================================
+    //Constructors
+    //=====================================
 
+
+    /**
+     * Constructor
+     */
+    public SnowtamAPI() { }
+
+
+    //=====================================
+    //Methodes
+    //=====================================
+
+    /**
+     * Make a request to the API with the url in the input table
+     * @param requestList
+     * @param applicationContext
+     * @return Booleans
+     */
     public Boolean Request(String[] requestList, Context applicationContext) {
 
         if(requestList.length == 0){
@@ -63,6 +84,13 @@ public class SnowtamAPI {
         return true;
     }
 
+    /**
+     * Simulation of a request.
+     * Read 4 JSON files in the assets for the usual process
+     * (SNOWTAM, SNOWTAM, NO SNOWTAM, SNOWTAM)
+     * @param applicationContext
+     * @return Booleans
+     */
     public Boolean RequestTest(Context applicationContext){
 
         try {
@@ -88,7 +116,13 @@ public class SnowtamAPI {
         return true;
     }
 
-    private Boolean ResponseParser(InputStream in) {
+
+    /**
+     * Get the response of the API in a input stream format and parse hin to find the SNOWTAM information and saved it
+     * @param in
+     * @return Booleans
+     */
+    protected Boolean ResponseParser(InputStream in) {
 
         JsonReader reader = null;
         try {
@@ -124,13 +158,21 @@ public class SnowtamAPI {
         return false;
     }
 
-    private void CreateSnowtam() {
+    /**
+     * Create an empty object Snowtam and save it in an hashmap
+     * case where the response of the API doesn't contained any SNOWTAM
+     */
+    protected void CreateSnowtam() {
         Snowtam snowtam = new Snowtam();
         answers.put(answers.size(), snowtam);
     }
 
 
-    private void CreateSnowtam(String text) {
+    /**
+     * Create an object Snowtam whith the SNOWTAM information given in the entree.
+     * @param text
+     */
+    protected void CreateSnowtam(String text) {
 
         int begin = text.indexOf("A)");
         int end = text.indexOf(")\nCREATED");
