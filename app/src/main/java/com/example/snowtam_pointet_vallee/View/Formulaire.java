@@ -1,26 +1,18 @@
 package com.example.snowtam_pointet_vallee.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.autofill.AutofillId;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.snowtam_pointet_vallee.Controller.FormController;
 import com.example.snowtam_pointet_vallee.R;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 public class Formulaire extends AppCompatActivity {
 
@@ -82,7 +74,19 @@ public class Formulaire extends AppCompatActivity {
         show_result.setOnClickListener(new View.OnClickListener() {     //click on the button V
             @Override
             public void onClick(View v) {
-                controller.RequeteAPI();
+                if (airport.getText() != "") {                          //if the user write a code but don't check it
+                    Context context = getApplicationContext();
+                    CharSequence text = "Veuillez valider le code entré avant de passer a la page suivante";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                    airport.setTextColor(Color.RED);                    //text color to red => warning there is an error
+                }
+                else {
+                    controller.RequeteAPI();
+                }
             }
         });
 
