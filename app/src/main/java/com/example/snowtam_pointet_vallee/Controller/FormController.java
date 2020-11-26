@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class FormController {
 
     //=====================================
-    //Attribut
+    //Attributs
     //=====================================
     private Formulaire formPage;
     private ArrayList<CharSequence> airportsList = new ArrayList<>();
@@ -17,15 +17,35 @@ public class FormController {
     private String[] requests;
 
 
+    //=====================================
+    //Getters / Setters
+    //=====================================
     public ArrayList getAirportsList() {
         return airportsList;
     }
 
 
+    //=====================================
+    //Constructors
+    //=====================================
+
+    /**
+     * Constructor
+     * @param formPage
+     */
     public FormController(Formulaire formPage){
         this.formPage = formPage;
     }
 
+
+    //=====================================
+    //Methodes
+    //=====================================
+
+    /**
+     * Take the airportList and for each element create a request for the API.
+     * Each request is stocked in a table of String which is given to the SnowtamAPI class for the request.
+     */
     public void RequeteAPI() {
 
         System.out.println("setup request");
@@ -38,12 +58,16 @@ public class FormController {
         }
 
         snowtamAPI = new SnowtamAPI();
-        snowtamAPI.Request(requests, formPage.getApplicationContext());
+        //snowtamAPI.Request(requests, formPage.getApplicationContext());
+        snowtamAPI.RequestTest(formPage.getApplicationContext());
         //switch activity
-
     }
 
-
+    /**
+     * Add an aiport to the airportList once they are checked
+     * @param airport
+     * @return booleans
+     */
     public boolean addAirport(CharSequence airport) {
         if(CheckAirportValidity(airport)) {
             airportsList.add(airport);
@@ -53,6 +77,14 @@ public class FormController {
         return false;
     }
 
+
+    /**
+     * Check the validity of an airport code
+     * Work in progress
+     * (can be better with a comparason with the database of all airports code)
+     * @param airport
+     * @return Booleans
+     */
     public boolean CheckAirportValidity(CharSequence airport) {
         if (airport.length() == 4) {
             if (airport.charAt(0) != 'i')
