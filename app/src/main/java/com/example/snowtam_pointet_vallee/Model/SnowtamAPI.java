@@ -146,9 +146,6 @@ public class SnowtamAPI {
                             CreateSnowtam(text);
                             return true;
                         }
-                        else{
-                            CreateSnowtam();
-                        }
                     }
                     else {
                         reader.skipValue();
@@ -163,7 +160,7 @@ public class SnowtamAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        CreateSnowtam();
         return false;
     }
 

@@ -14,11 +14,19 @@ import java.util.HashMap;
 
 public class SwipeAdapter extends FragmentStatePagerAdapter {
 
-    HashMap listSnowtam;
+    HashMap<Integer,Snowtam> listSnowtam = new HashMap<>();
 
     public SwipeAdapter(FragmentManager fm, HashMap<Integer, Snowtam> listSnowtam){
         super(fm);
         this.listSnowtam = listSnowtam;
+        System.out.println("list size " + listSnowtam.size());
+        /*
+        if (listSnowtam.isEmpty()){
+            listSnowtam.put(0,new Snowtam("test"));
+            listSnowtam.put(1,new Snowtam("test2"));
+        }
+
+         */
     }
 
 
@@ -28,7 +36,9 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
         Fragment pageFragment = new FragmentPage();
         Bundle bundle = new Bundle();
         bundle.putInt("pageNumber",position);
-        bundle.putString("data", listSnowtam.get(position).toString());
+        System.out.println("position " + position);
+        bundle.putString("data", (String) ((Snowtam) listSnowtam.get(position)).getOriginal());
+        System.out.println("data " + (String) listSnowtam.get(position).getOriginal());
         pageFragment.setArguments(bundle);
 
         return pageFragment;
@@ -36,6 +46,7 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
+        //return 1;
         return listSnowtam.size();
     }
 }

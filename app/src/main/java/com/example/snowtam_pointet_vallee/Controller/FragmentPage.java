@@ -20,12 +20,11 @@ public class FragmentPage extends Fragment {
 
         final View view;
         Bundle bundle = getArguments();
-        int pageNumber = bundle.getInt("pageNumber");
         String data = bundle.getString("data");
 
         view = inflater.inflate(R.layout.activity_resultpage,container,false);
         TextView textView = (TextView) view.findViewById(R.id.show_data);
-        textView.setText("Page " + pageNumber + '\n' + data);
+        textView.setText(data);
 
         return view;
     }

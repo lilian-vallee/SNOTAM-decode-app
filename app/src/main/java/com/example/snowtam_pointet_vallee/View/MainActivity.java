@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoFormulaire = new Intent(getApplicationContext(),ResultPage.class);
+                Intent gotoFormulaire = new Intent(getApplicationContext(),Formulaire.class);
                 startActivity(gotoFormulaire);
             }
         });

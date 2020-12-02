@@ -25,10 +25,9 @@ public class ResultPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultpage);
 
-
         Bundle bundle = this.getIntent().getExtras();
         if(bundle != null) {
-            listSnowtam = (HashMap<Integer, Snowtam>) bundle.getSerializable("AnswerList");
+            listSnowtam = (HashMap<Integer, Snowtam>) bundle.getSerializable("answersList");
         }
 
         ViewPager viewPager = (ViewPager)findViewById(R.id.view_pager);

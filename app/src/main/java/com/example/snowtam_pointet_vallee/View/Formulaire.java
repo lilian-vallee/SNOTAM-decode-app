@@ -1,26 +1,18 @@
 package com.example.snowtam_pointet_vallee.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.autofill.AutofillId;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.snowtam_pointet_vallee.Controller.FormController;
 import com.example.snowtam_pointet_vallee.R;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 public class Formulaire extends AppCompatActivity {
 

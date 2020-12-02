@@ -1,10 +1,6 @@
 package com.example.snowtam_pointet_vallee.Model;
 
-import android.content.res.Resources;
-
-import com.example.snowtam_pointet_vallee.R;
-
-public class Snowtam {
+public class Snowtam implements java.io.Serializable{
 
     private String original;
     private String decode;
@@ -14,5 +10,11 @@ public class Snowtam {
         System.out.println(original);
     }
 
-    public Snowtam() {}
+    public Snowtam() {
+        this.original = "pas de snowtam pour cet aeroport";
+    }
+
+    public String getOriginal() {
+        return original;
+    }
 }
