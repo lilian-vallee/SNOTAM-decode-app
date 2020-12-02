@@ -160,7 +160,7 @@ public class SnowtamAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        CreateSnowtam();
         return false;
     }
 

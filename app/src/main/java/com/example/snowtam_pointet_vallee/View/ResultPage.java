@@ -6,14 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.snowtam_pointet_vallee.Controller.SwipeAdapter;
-import com.example.snowtam_pointet_vallee.Model.Airport;
+import com.example.snowtam_pointet_vallee.Model.Snowtam;
 import com.example.snowtam_pointet_vallee.R;
 
 import java.util.HashMap;
 
 public class ResultPage extends AppCompatActivity {
 
-    HashMap<Integer, Airport> listSnowtam = new HashMap<>();
+    HashMap<Integer, Snowtam> listSnowtam = new HashMap<>();
 
     public int getListSize() {
         return listSnowtam.size();
@@ -25,10 +25,9 @@ public class ResultPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultpage);
 
-
         Bundle bundle = this.getIntent().getExtras();
         if(bundle != null) {
-            listSnowtam = (HashMap<Integer, Airport>) bundle.getSerializable("AnswerList");
+            listSnowtam = (HashMap<Integer, Snowtam>) bundle.getSerializable("answersList");
         }
 
         ViewPager viewPager = (ViewPager)findViewById(R.id.view_pager);
