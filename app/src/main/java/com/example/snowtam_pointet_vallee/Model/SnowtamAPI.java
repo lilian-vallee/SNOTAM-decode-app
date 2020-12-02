@@ -25,12 +25,20 @@ public class SnowtamAPI {
     //=====================================
     //Attributs
     //=====================================
+
     private HashMap<Integer,Snowtam> answers = new HashMap<>();
+
+    //=====================================
+    //Attributs
+    //=====================================
+
+    public HashMap<Integer, Snowtam> getAnswers() {
+        return answers;
+    }
 
     //=====================================
     //Constructors
     //=====================================
-
 
     /**
      * Constructor
@@ -68,9 +76,7 @@ public class SnowtamAPI {
                         public void onResponse(String response) {
 
                             InputStream in = new ByteArrayInputStream(response.getBytes());
-                            if(!ResponseParser(in)){
-                                CreateSnowtam();
-                            }
+                            ResponseParser(in);
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -140,6 +146,9 @@ public class SnowtamAPI {
                             CreateSnowtam(text);
                             return true;
                         }
+                        else{
+                            CreateSnowtam();
+                        }
                     }
                     else {
                         reader.skipValue();
@@ -177,7 +186,6 @@ public class SnowtamAPI {
         int begin = text.indexOf("A)");
         int end = text.indexOf(")\nCREATED");
         System.out.println("SNOWTAM aquired");
-        System.out.println(text.subSequence(begin,end));
 
         Snowtam snowtam = new Snowtam((String) text.subSequence(begin,end));
         answers.put(answers.size(), snowtam);
