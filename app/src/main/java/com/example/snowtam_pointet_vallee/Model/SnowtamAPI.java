@@ -26,13 +26,13 @@ public class SnowtamAPI {
     //Attributs
     //=====================================
 
-    private HashMap<Integer,Snowtam> answers = new HashMap<>();
+    private HashMap<Integer, Airport> answers = new HashMap<>();
 
     //=====================================
     //Attributs
     //=====================================
 
-    public HashMap<Integer, Snowtam> getAnswers() {
+    public HashMap<Integer, Airport> getAnswers() {
         return answers;
     }
 
@@ -142,12 +142,9 @@ public class SnowtamAPI {
                     String attribut = reader.nextName();
                     if(attribut.equals("all")){
                         String text = reader.nextString();
-                        if(text.contains("SNOWTAM")){
+                        if(text.contains("SNOWTAM")) {
                             CreateSnowtam(text);
                             return true;
-                        }
-                        else{
-                            CreateSnowtam();
                         }
                     }
                     else {
@@ -172,8 +169,8 @@ public class SnowtamAPI {
      * case where the response of the API doesn't contained any SNOWTAM
      */
     protected void CreateSnowtam() {
-        Snowtam snowtam = new Snowtam();
-        answers.put(answers.size(), snowtam);
+        Airport airport = new Airport();
+        answers.put(answers.size(), airport);
     }
 
 
@@ -187,7 +184,7 @@ public class SnowtamAPI {
         int end = text.indexOf(")\nCREATED");
         System.out.println("SNOWTAM aquired");
 
-        Snowtam snowtam = new Snowtam((String) text.subSequence(begin,end));
-        answers.put(answers.size(), snowtam);
+        Airport airport = new Airport((String) text.subSequence(begin,end));
+        answers.put(answers.size(), airport);
     }
 }

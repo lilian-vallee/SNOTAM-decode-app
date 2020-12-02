@@ -3,11 +3,10 @@ package com.example.snowtam_pointet_vallee.Controller;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.snowtam_pointet_vallee.Model.Snowtam;
+import com.example.snowtam_pointet_vallee.Model.Airport;
 import com.example.snowtam_pointet_vallee.Model.SnowtamAPI;
 import com.example.snowtam_pointet_vallee.View.Formulaire;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -63,11 +62,11 @@ public class FormController {
         }
 
         snowtamAPI = new SnowtamAPI();
-        snowtamAPI.Request(requests, formPage.getApplicationContext());
-        //snowtamAPI.RequestTest(formPage.getApplicationContext());
+        //snowtamAPI.Request(requests, formPage.getApplicationContext());
+        snowtamAPI.RequestTest(formPage.getApplicationContext());
     }
 
-    private void SwitchActivity(HashMap<Integer, Snowtam> answers) {
+    private void SwitchActivity(HashMap<Integer, Airport> answers) {
         Intent intent = new Intent();
         Bundle extras = new Bundle();
         extras.putSerializable("answerList",answers);

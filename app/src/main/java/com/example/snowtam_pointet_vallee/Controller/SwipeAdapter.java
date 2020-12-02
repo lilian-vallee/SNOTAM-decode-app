@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.snowtam_pointet_vallee.Model.Snowtam;
+import com.example.snowtam_pointet_vallee.Model.Airport;
 
 import java.util.HashMap;
 
@@ -16,7 +16,7 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
 
     HashMap listSnowtam;
 
-    public SwipeAdapter(FragmentManager fm, HashMap<Integer, Snowtam> listSnowtam){
+    public SwipeAdapter(FragmentManager fm, HashMap<Integer, Airport> listSnowtam){
         super(fm);
         this.listSnowtam = listSnowtam;
     }
