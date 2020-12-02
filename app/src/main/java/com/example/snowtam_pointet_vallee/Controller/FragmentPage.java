@@ -20,13 +20,13 @@ public class FragmentPage extends Fragment {
 
         final View view;
         Bundle bundle = getArguments();
-        int count = bundle.getInt("pageNumber");
+        int pageNumber = bundle.getInt("pageNumber");
+        String data = bundle.getString("data");
 
         view = inflater.inflate(R.layout.activity_resultpage,container,false);
         TextView textView = (TextView) view.findViewById(R.id.show_data);
-        textView.setText("Page " + count);
+        textView.setText("Page " + pageNumber + '\n' + data);
 
         return view;
-        //return super.onCreateView(inflater, container, savedInstanceState);
     }
 }
