@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class SwipeAdapter extends FragmentStatePagerAdapter {
 
-    HashMap<Integer,Snowtam> listSnowtam = new HashMap<>();
+    HashMap<Integer,Airport> listSnowtam = new HashMap<>();
 
     public SwipeAdapter(FragmentManager fm, HashMap<Integer, Airport> listSnowtam){
         super(fm);
@@ -37,8 +37,8 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
         Bundle bundle = new Bundle();
         bundle.putInt("pageNumber",position);
         System.out.println("position " + position);
-        bundle.putString("data", (String) ((Snowtam) listSnowtam.get(position)).getOriginal());
-        System.out.println("data " + (String) listSnowtam.get(position).getOriginal());
+        bundle.putString("data", (String) ((Airport) listSnowtam.get(position)).getSnowtamOriginal());
+        System.out.println("data " + (String) listSnowtam.get(position).getSnowtamOriginal());
         pageFragment.setArguments(bundle);
 
         return pageFragment;

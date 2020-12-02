@@ -1,10 +1,7 @@
 package com.example.snowtam_pointet_vallee.Model;
 
-import android.content.res.Resources;
 
-import com.example.snowtam_pointet_vallee.R;
-
-public class Airport {
+public class Airport implements java.io.Serializable{
 
     private String snowtamOriginal;
     private String snowtamDecode;
