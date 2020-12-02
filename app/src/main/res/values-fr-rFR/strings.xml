@@ -4,4 +4,5 @@
     <string name="new_form">nouvelle entrée</string>
     <string name="airport_number">code aeroport</string>
     <string name="registerCodes">numero enregistrés</string>
+    <string name="no_SNOWTAM">Pas de SNOWTAM disponible.</string>
 </resources>

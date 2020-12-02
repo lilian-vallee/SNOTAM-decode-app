@@ -63,8 +63,8 @@ public class FormController {
         }
 
         snowtamAPI = new SnowtamAPI();
-        //snowtamAPI.Request(requests, formPage.getApplicationContext());
-        snowtamAPI.RequestTest(formPage.getApplicationContext());
+        snowtamAPI.Request(requests, formPage.getApplicationContext());
+        //snowtamAPI.RequestTest(formPage.getApplicationContext());
     }
 
     private void SwitchActivity(HashMap<Integer, Snowtam> answers) {
