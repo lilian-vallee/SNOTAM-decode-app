@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +25,8 @@ public class Formulaire extends AppCompatActivity {
 
     TextView showCode;          //where the user read the codes he already wrote
 
-    ImageButton show_result;    //go to the next page whit results
-    ImageButton addAirport;     //add the code to a list which is used to show results
+    Button show_result;    //go to the next page whit results
+    Button addAirport;     //add the code to a list which is used to show results
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
