@@ -76,8 +76,8 @@ public class FragmentPage extends Fragment {
             }
         });
 
-        switchData = view.findViewById(R.id.switchData);
-        if (data != null){        switchData.setVisibility(View.VISIBLE);}
+        switchData = view.findViewById(R.id.switchData);            //switch use to set snowtam data on normal stage or decode stage
+        if (data != null){switchData.setVisibility(View.VISIBLE);}  //if no snowtam, so don't show the switch
 
 
         switchData.setOnClickListener(new View.OnClickListener() {
