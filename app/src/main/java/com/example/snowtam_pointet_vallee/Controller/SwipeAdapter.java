@@ -45,4 +45,6 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
         //return 1;
         return listSnowtam.size();
     }
+
+
 }
