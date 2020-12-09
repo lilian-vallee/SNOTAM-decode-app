@@ -3,6 +3,8 @@
     <string name="hello">hello</string>
     <string name="new_form">new form</string>
     <string name="airport_number">airport number</string>
-    <string name="registerCodes">code checks</string>
+    <string name="registerCodes">codes check :</string>
     <string name="no_SNOWTAM">No SNOWTAM available.</string>
+    <string name="addCode">add code</string>
+    <string name="sendCode">send code</string>
 </resources>

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Formulaire">
+    tools:context=".View.Formulaire"
+    android:background="@drawable/fond_clear">
 
     <EditText
         android:id="@+id/airport1"
@@ -20,21 +21,21 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <Button
         android:id="@+id/button_addAirport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/addCode"
         app:layout_constraintBottom_toBottomOf="@id/afficheText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/airport1"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:layout_constraintTop_toTopOf="@id/airport1"/>
 
-    <ImageButton
+    <Button
         android:id="@+id/button_showResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_send"
+        android:text="@string/sendCode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -49,6 +50,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/button_addAirport" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

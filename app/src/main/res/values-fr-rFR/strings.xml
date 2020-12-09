@@ -5,4 +5,6 @@
     <string name="airport_number">code aeroport</string>
     <string name="registerCodes">numero enregistrés</string>
     <string name="no_SNOWTAM">Pas de SNOWTAM disponible.</string>
+    <string name="addCode">ajouter code</string>
+    <string name="sendCode">envoyer les codes</string>
 </resources>
