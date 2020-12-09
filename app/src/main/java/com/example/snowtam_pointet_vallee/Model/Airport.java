@@ -3,6 +3,14 @@ package com.example.snowtam_pointet_vallee.Model;
 
 import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class Airport implements java.io.Serializable{
 
     //=====================================
@@ -87,8 +95,26 @@ public class Airport implements java.io.Serializable{
 
     private String decodeB(String snowtam) {
 
-        int begin = snowtam.indexOf("B)") +2;
-        int end = snowtam.indexOf("C)");
+        try {
 
+            int begin = snowtam.indexOf("B)") +2;
+            int end = snowtam.indexOf("C)");
+
+            String dateStr = snowtam.substring(begin,end);
+            dateStr = dateStr.replaceAll("\\s", "");
+
+            Date date = new SimpleDateFormat("MMddkkmm").parse(dateStr);
+
+            Log.d("Debug", dateStr +"\t"+ date);
+
+            DateFormat dateFormat = new SimpleDateFormat("d MMM kk'h'mm z");
+            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+            snowtam = snowtam.replace(snowtam.substring(begin,end), " "+ dateFormat.format(date) +"\n");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return snowtam;
     }
 }
