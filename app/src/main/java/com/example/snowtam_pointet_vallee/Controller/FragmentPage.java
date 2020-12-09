@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.snowtam_pointet_vallee.R;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -24,6 +25,9 @@ public class FragmentPage extends Fragment {
     private Button map_visibilityON;
     private Button map_visibilityOFF;
 
+    private SwitchMaterial switchData;
+    private boolean isDecode = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class FragmentPage extends Fragment {
         Bundle bundle = getArguments();
         String name = bundle.getString("airportName");          //get the airport name
         String data = bundle.getString("data");                 //get the airport snowtan
+        String decodeData = bundle.getString("decodeData");     //get the decode snowtam
         double position [] = (double[]) bundle.get("coordonates");   //get the airport coordonates
 
 
@@ -68,6 +73,24 @@ public class FragmentPage extends Fragment {
                     myOpenMapView.setVisibility(View.INVISIBLE);
                     map_visibilityON.setVisibility(View.VISIBLE);
                     map_visibilityOFF.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        switchData = view.findViewById(R.id.switchData);
+        if (data != null){        switchData.setVisibility(View.VISIBLE);}
+
+
+        switchData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isDecode){
+                    textData.setText(data);
+                    isDecode = false;
+                }
+                else {
+                    textData.setText(decodeData);
+                    isDecode = true;
+                }
             }
         });
 

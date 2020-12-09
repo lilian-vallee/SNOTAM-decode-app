@@ -32,6 +32,8 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
         System.out.println("position " + position);
         bundle.putString("data", (String) ((Airport) listSnowtam.get(position)).getSnowtamOriginal());
         System.out.println("data " + (String) listSnowtam.get(position).getSnowtamOriginal());
+        bundle.putString("decodeData", (String) ((Airport) listSnowtam.get(position)).getSnowtamDecode());
+        System.out.println("decodeData " + (String) listSnowtam.get(position).getSnowtamDecode());
         bundle.putString("airportName",(String) ((Airport) listSnowtam.get(position)).getAirportName());
         System.out.println("airportName " + (String) listSnowtam.get(position).getAirportName());
         bundle.putDoubleArray("coordonates",((Airport) listSnowtam.get(position)).getCoordonates());

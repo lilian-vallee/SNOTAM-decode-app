@@ -7,7 +7,7 @@
     android:background="@drawable/fond"
     tools:context=".View.ResultPage"
     android:scrollbarAlwaysDrawVerticalTrack="true"
-    android:scrollbars="vertical">
+    android:scrollbars="vertical" >
 
     <TextView
         android:id="@+id/airportName"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:paddingTop="0dp"
         app:layout_constraintBottom_toTopOf="@id/show_data"
-        android:textSize="30dp"/>
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/show_data"
@@ -30,7 +30,16 @@
         android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/mapview"
-        android:paddingLeft="50dp"/>
+        android:paddingLeft="50dp" />
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switchData"
+        android:visibility="invisible"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/airportName"/>
 
     <Button
         android:layout_height="wrap_content"
@@ -40,9 +49,7 @@
         android:theme="@style/Theme.AppCompat"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="invisible"
-
-        />
+        android:visibility="invisible" />
 
     <Button
         android:layout_height="wrap_content"
@@ -52,8 +59,7 @@
         android:theme="@style/Theme.AppCompat"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"
-        />
+        android:visibility="invisible" />
 
     <org.osmdroid.views.MapView
         android:id="@+id/mapview"
