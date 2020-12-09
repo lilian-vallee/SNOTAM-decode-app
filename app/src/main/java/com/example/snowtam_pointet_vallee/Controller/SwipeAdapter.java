@@ -20,13 +20,6 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
         super(fm);
         this.listSnowtam = listSnowtam;
         System.out.println("list size " + listSnowtam.size());
-        /*
-        if (listSnowtam.isEmpty()){
-            listSnowtam.put(0,new Snowtam("test"));
-            listSnowtam.put(1,new Snowtam("test2"));
-        }
-
-         */
     }
 
 

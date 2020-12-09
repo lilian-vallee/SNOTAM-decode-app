@@ -26,20 +26,21 @@ public class FragmentPage extends Fragment {
 
         final View view;
         Bundle bundle = getArguments();
-        String data = bundle.getString("data");
-        String name = bundle.getString("airportName");
-        double position [] = (double[]) bundle.get("coordonates");
+        String name = bundle.getString("airportName");          //get the airport name
+        String data = bundle.getString("data");                 //get the airport snowtan
+        double position [] = (double[]) bundle.get("coordonates");   //get the airport coordonates
 
 
-        view = inflater.inflate(R.layout.activity_resultpage,container,false);
-        TextView textView = (TextView) view.findViewById(R.id.show_data);
-        textView.setText(data);
-        TextView textName = (TextView) view.findViewById(R.id.airportName);
-        textName.setText(name);
+        view = inflater.inflate(R.layout.activity_resultpage,container,false);      //initiate the view
+        TextView textName = (TextView) view.findViewById(R.id.airportName);                 //get item airportName
+        textName.setText(name);                                                                 //set airport name
+        TextView textData = (TextView) view.findViewById(R.id.show_data);                   //get item show_data
+        textData.setText(data);                                                                 //set snowtam
 
 
-        myOpenMapView = (MapView) view.findViewById(R.id.mapview);
-        myOpenMapView.setBuiltInZoomControls(true);
+
+        myOpenMapView = (MapView) view.findViewById(R.id.mapview);                          //get item map
+        myOpenMapView.setBuiltInZoomControls(true);                                         //initiate map
         myOpenMapView.setClickable(true);
         myOpenMapView.getController().setZoom(10);
         myOpenMapView.getController().setCenter(new GeoPoint(position[0], position[1]));
