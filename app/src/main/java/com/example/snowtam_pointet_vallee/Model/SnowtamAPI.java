@@ -3,6 +3,7 @@ package com.example.snowtam_pointet_vallee.Model;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.JsonReader;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,18 +23,12 @@ import java.util.HashMap;
 
 public class SnowtamAPI {
 
-    /**
-     * Constructor
-     */
-    public SnowtamAPI() { }
-
-
     //=====================================
     //Methodes
     //=====================================
 
     /**
-     * Make a request to the API with the url in the input table
+     * Make a request to the API with an url
      * @param url
      * @param context
      * @return Booleans
@@ -41,6 +36,9 @@ public class SnowtamAPI {
     public String request(String url, Context context) {
 
         final String[] snowtam = new String[1]; // needed by the inner class of Volley.
+
+
+        Log.i("FormulairePage", "Sending SNOWTAM Request ...");
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -80,6 +78,8 @@ public class SnowtamAPI {
         try {
 
             AssetManager assetManager = applicationContext.getAssets();
+
+            Log.i("FormulairePage", "Loading SNOWTAM file ...");
 
             InputStream inputStream = assetManager.open("Realtime NOTAMS UUEE.json");
             snowtams[0] = ResponseParser(inputStream);
@@ -155,7 +155,8 @@ public class SnowtamAPI {
 
         int begin = text.indexOf("A)");
         int end = text.indexOf(")\nCREATED");
-        System.out.println("SNOWTAM aquired");
+
+        Log.i("FormulairePage", "SNOWTAM find.");
 
         return (String) text.subSequence(begin,end);
     }

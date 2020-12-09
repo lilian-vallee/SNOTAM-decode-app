@@ -5,11 +5,19 @@ import android.util.Log;
 
 public class Airport implements java.io.Serializable{
 
+    //=====================================
+    //Attributs
+    //=====================================
+
     private String codeICAO;
-    private String snowtamOriginal;
-    private String snowtamDecode;
-    private String airportName = "name";
-    private double[] coordonates;
+    private String snowtamOriginal; // SNOWTAM undecoded
+    private String snowtamDecode; // SNOWTAM decoded
+    private String airportName = "default name";
+    private double[] coordonates; // coordonates ==> longitude, latitude
+
+    //=====================================
+    //Getters / Setters
+    //=====================================
 
     public void setSnowtamOriginal(String snowtamOriginal) {
         this.snowtamOriginal = snowtamOriginal;
@@ -47,10 +55,9 @@ public class Airport implements java.io.Serializable{
 
     public double[] getCoordonates() { return coordonates; }
 
-
-    private void startDecode() {
-        String snowtam = decodeA(snowtamOriginal);
-    }
+    //=====================================
+    //Methodes
+    //=====================================
 
     public void decode() {
 
@@ -58,23 +65,30 @@ public class Airport implements java.io.Serializable{
             snowtamDecode = " ";
         }
         else{
-            String snowtam = "";
+            String snowtam = snowtamOriginal;
             snowtam = decodeA(snowtam);
+            snowtam = decodeB(snowtam);
 
             Log.i("Airport", "New decoded SNOWTAM : "+ snowtam);
+
             snowtamDecode = snowtam;
         }
     }
 
     private String decodeA(String snowtam) {
 
-        int begin = snowtamOriginal.indexOf("A)") +2;
-        int end = snowtamOriginal.indexOf("B)");
+        int begin = snowtam.indexOf("A)") +2;
+        int end = snowtam.indexOf("B)");
 
-        String entree = snowtamOriginal.substring(begin,end);
-        entree = airportName;
-        snowtam = snowtam + "A) "+ entree +"\n";
+        snowtam = snowtam.replace(snowtam.substring(begin,end), " "+ airportName +"\n");
 
         return snowtam;
+    }
+
+    private String decodeB(String snowtam) {
+
+        int begin = snowtam.indexOf("B)") +2;
+        int end = snowtam.indexOf("C)");
+
     }
 }
