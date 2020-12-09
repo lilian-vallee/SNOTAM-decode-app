@@ -22,24 +22,6 @@ import java.util.HashMap;
 
 public class SnowtamAPI {
 
-    //=====================================
-    //Attributs
-    //=====================================
-
-    private HashMap<Integer, Airport> answers = new HashMap<>();
-
-    //=====================================
-    //Attributs
-    //=====================================
-
-    public HashMap<Integer, Airport> getAnswers() {
-        return answers;
-    }
-
-    //=====================================
-    //Constructors
-    //=====================================
-
     /**
      * Constructor
      */
@@ -52,42 +34,36 @@ public class SnowtamAPI {
 
     /**
      * Make a request to the API with the url in the input table
-     * @param requestList
-     * @param applicationContext
+     * @param url
+     * @param context
      * @return Booleans
      */
-    public Boolean Request(String[] requestList, Context applicationContext) {
+    public String request(String url, Context context) {
 
-        if(requestList.length == 0){
-            return false;
-        }
+        final String[] snowtam = new String[1]; // needed by the inner class of Volley.
 
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(applicationContext);
+        RequestQueue queue = Volley.newRequestQueue(context);
 
-        for (int i=0; i<requestList.length; i++){
-            String url = requestList[i];
-
-            StringRequest stringRequest = new StringRequest(
-                    Request.Method.GET,
-                    url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-
-                            InputStream in = new ByteArrayInputStream(response.getBytes());
-                            ResponseParser(in);
-                        }
-                    }, new Response.ErrorListener() {
+        StringRequest stringRequest = new StringRequest(
+            Request.Method.GET,
+            url,
+            new Response.Listener<String>() {
                 @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println("Error");
-                }
-            });
+                public void onResponse(String response) {
 
-            queue.add(stringRequest);
-        }
-        return true;
+                   InputStream in = new ByteArrayInputStream(response.getBytes());
+                   snowtam[0] = ResponseParser(in);
+                }
+            }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Error");
+            }
+        });
+        queue.add(stringRequest);
+
+        return snowtam[0];
     }
 
     /**
@@ -97,29 +73,32 @@ public class SnowtamAPI {
      * @param applicationContext
      * @return Booleans
      */
-    public Boolean RequestTest(Context applicationContext){
+    public String[] RequestTest(Context applicationContext){
+
+        String[] snowtams = new String[4];
 
         try {
 
             AssetManager assetManager = applicationContext.getAssets();
+
             InputStream inputStream = assetManager.open("Realtime NOTAMS UUEE.json");
-            ResponseParser(inputStream);
+            snowtams[0] = ResponseParser(inputStream);
 
             inputStream = assetManager.open("Realtime NOTAMS ENBO.json");
-            ResponseParser(inputStream);
+            snowtams[1] = ResponseParser(inputStream);
 
             inputStream = assetManager.open("Realtime NOTAMS ENVA.json");
-            ResponseParser(inputStream);
+            snowtams[2] = ResponseParser(inputStream);
 
             inputStream = assetManager.open("Realtime NOTAMS ENGM.json");
-            ResponseParser(inputStream);
+            snowtams[3] =  ResponseParser(inputStream);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+        return snowtams;
     }
 
 
@@ -128,7 +107,7 @@ public class SnowtamAPI {
      * @param in
      * @return Booleans
      */
-    protected Boolean ResponseParser(InputStream in) {
+    protected String ResponseParser(InputStream in) {
 
         JsonReader reader = null;
         try {
@@ -139,13 +118,16 @@ public class SnowtamAPI {
             while(reader.hasNext()){
                 reader.beginObject();
                 while(reader.hasNext()){
+
                     String attribut = reader.nextName();
+
                     if(attribut.equals("all")){
                         String text = reader.nextString();
+
                         if(text.contains("SNOWTAM")) {
-                            CreateSnowtam(text);
-                            return true;
+                            return CreateSnowtam(text);
                         }
+
                     }
                     else {
                         reader.skipValue();
@@ -160,31 +142,21 @@ public class SnowtamAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        CreateSnowtam();
-        return false;
-    }
-
-    /**
-     * Create an empty object Snowtam and save it in an hashmap
-     * case where the response of the API doesn't contained any SNOWTAM
-     */
-    protected void CreateSnowtam() {
-        Airport airport = new Airport();
-        answers.put(answers.size(), airport);
+        return null;
     }
 
 
     /**
      * Create an object Snowtam whith the SNOWTAM information given in the entree.
      * @param text
+     * @return
      */
-    protected void CreateSnowtam(String text) {
+    protected String CreateSnowtam(String text) {
 
         int begin = text.indexOf("A)");
         int end = text.indexOf(")\nCREATED");
         System.out.println("SNOWTAM aquired");
 
-        Airport airport = new Airport((String) text.subSequence(begin,end));
-        answers.put(answers.size(), airport);
+        return (String) text.subSequence(begin,end);
     }
 }

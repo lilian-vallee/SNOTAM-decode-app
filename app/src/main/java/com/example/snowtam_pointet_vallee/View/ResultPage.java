@@ -7,7 +7,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.snowtam_pointet_vallee.Controller.SwipeAdapter;
 import com.example.snowtam_pointet_vallee.Model.Airport;
-import com.example.snowtam_pointet_vallee.Model.Snowtam;
 import com.example.snowtam_pointet_vallee.R;
 
 import java.util.HashMap;

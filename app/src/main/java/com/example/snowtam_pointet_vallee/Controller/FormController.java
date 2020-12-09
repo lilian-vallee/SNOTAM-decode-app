@@ -4,8 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.snowtam_pointet_vallee.Model.Airport;
-import com.example.snowtam_pointet_vallee.Model.Snowtam;
-import com.example.snowtam_pointet_vallee.Model.SnowtamAPI;
+import com.example.snowtam_pointet_vallee.Model.AirportBuilder;
 import com.example.snowtam_pointet_vallee.View.Formulaire;
 import com.example.snowtam_pointet_vallee.View.ResultPage;
 
@@ -18,10 +17,12 @@ public class FormController {
     //=====================================
     //Attributs
     //=====================================
+
+    protected Boolean test = true; // trigger (true) or not (false) all API call.
+
     private Formulaire formPage;
     private ArrayList<CharSequence> airportsList = new ArrayList<>();
-    private SnowtamAPI snowtamAPI;
-    private String[] requests;
+    AirportBuilder airportBuilder;
 
 
     //=====================================
@@ -42,6 +43,8 @@ public class FormController {
      */
     public FormController(Formulaire formPage){
         this.formPage = formPage;
+
+        airportBuilder = new AirportBuilder();
     }
 
 
@@ -55,21 +58,16 @@ public class FormController {
      */
     public void RequeteAPI() {
 
-        System.out.println("setup request");
-        requests = new String[airportsList.size()];
-
-        for (int i=0; i < airportsList.size(); i++){
-            String request = "https://applications.icao.int/dataservices/api/notams-realtime-list?api_key=19569950-27e2-11eb-bb91-378bd10b6324&format=json&criticality=1&locations="+ airportsList.get(i);
-            requests[i] = request;
-            System.out.println(request);
+        if (!test){
+            SwitchActivity(airportBuilder.getAirports());
+        }
+        else{
+            SwitchActivity(airportBuilder.airportTest(formPage.getApplicationContext()));
         }
 
-        snowtamAPI = new SnowtamAPI();
-        //snowtamAPI.Request(requests, formPage.getApplicationContext());
-        snowtamAPI.RequestTest(formPage.getApplicationContext());
-        SwitchActivity(snowtamAPI.getAnswers());
-
     }
+
+
 
     private void SwitchActivity(HashMap<Integer, Airport> answers) {
         Intent intent = new Intent(formPage.getApplicationContext(), ResultPage.class);
@@ -103,13 +101,10 @@ public class FormController {
      * @return Booleans
      */
     public boolean CheckAirportValidity(CharSequence airport) {
-        if (airport.length() == 4) {
-            if (airport.charAt(0) != 'i')
-                if (airport.charAt(0) != 'j')
-                    if (airport.charAt(0) != 'x')
-                        return true;
+        if(!test){
+            return airportBuilder.checkAirport((String) airport,formPage.getApplicationContext());
         }
-        return false;
+        else return true;
     }
 
 

@@ -1,0 +1,16 @@
+[
+  {
+    "Terr_code": "LF",
+    "State_Name": "FRANCE",
+    "ICAO_Code": "ENGM",
+    "AFTN": "",
+    "Location_Name": "Oslo/Gardermoen",
+    "Lat": "49:00:3500N",
+    "Long": "002:32:5200E",
+    "Latitude": 60.202778,
+    "Longitude": 11.083889,
+    "codcoun": "LFFranc",
+    "IATA_Code": "CDG",
+    "ctry_code": "FRA"
+  }
+]
