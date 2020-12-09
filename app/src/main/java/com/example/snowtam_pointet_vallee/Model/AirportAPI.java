@@ -3,6 +3,7 @@ package com.example.snowtam_pointet_vallee.Model;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.JsonReader;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,14 +22,16 @@ import java.io.UnsupportedEncodingException;
 public class AirportAPI {
 
     /**
-     * Make a request to the API with the url in the input table
+     * Make a request to the API with an url
      * @param url
      * @param context
      * @return Booleans
      */
     public Airport request(String url, Context context) {
 
-        final InputStream[] in = new InputStream[1];
+        final InputStream[] in = new InputStream[1];// needed for Volley
+
+        Log.i("FormulairePage", "Sending identification Request ...");
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -54,9 +57,8 @@ public class AirportAPI {
     }
 
     /**
-     * Simulation of a request.
+     * Simulation of an identification request.
      * Read 4 JSON files in the assets for the usual process
-     * (SNOWTAM, SNOWTAM, NO SNOWTAM, SNOWTAM)
      * @param applicationContext
      * @return Booleans
      */
@@ -67,6 +69,8 @@ public class AirportAPI {
         try {
 
             AssetManager assetManager = applicationContext.getAssets();
+
+            Log.i("FormulairePage", "Loading identification files ...");
 
             InputStream inputStream = assetManager.open("identification UUEE.json");
             airports[0] = ResponseParser(inputStream);
@@ -90,7 +94,7 @@ public class AirportAPI {
 
 
     /**
-     * Get the response of the API in a input stream format and parse hin to find the SNOWTAM information and saved it
+     * Get the response of the API in a input stream format and parse him to find wanted informations and saved them
      * @param in
      * @return Booleans
      */

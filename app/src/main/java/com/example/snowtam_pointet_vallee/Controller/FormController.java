@@ -2,6 +2,7 @@ package com.example.snowtam_pointet_vallee.Controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.snowtam_pointet_vallee.Model.Airport;
 import com.example.snowtam_pointet_vallee.Model.AirportBuilder;
@@ -53,8 +54,8 @@ public class FormController {
     //=====================================
 
     /**
-     * Take the airportList and for each element create a request for the API.
-     * Each request is stocked in a table of String which is given to the SnowtamAPI class for the request.
+     * Take all the airports initialized in the aiportBuilder for switching activity
+     * if test are enable the SwitchActivity methode take what the airportTest methode of the aiportBuilder send him
      */
     public void RequeteAPI() {
 
@@ -70,11 +71,19 @@ public class FormController {
 
 
     private void SwitchActivity(HashMap<Integer, Airport> answers) {
+
+        Log.i("FormulairePage","Initialise Bundle");
+
         Intent intent = new Intent(formPage.getApplicationContext(), ResultPage.class);
         Bundle extras = new Bundle();
+
+        Log.i("FormulairePage", "Loading "+ answers.size() +" aiports.");
+
         extras.putSerializable("answersList",answers);
         intent.putExtras(extras);
-        System.out.println("WAZZZAAAAAAAA");
+
+        Log.i("FormulairePage", "Switching activity");
+
         formPage.startActivity(intent);
     }
 
@@ -86,7 +95,6 @@ public class FormController {
     public boolean addAirport(CharSequence airport) {
         if(CheckAirportValidity(airport)) {
             airportsList.add(airport);
-            System.out.println("airport add"+airport);
             return true;
         }
         return false;
@@ -94,15 +102,14 @@ public class FormController {
 
 
     /**
-     * Check the validity of an airport code
-     * Work in progress
-     * (can be better with a comparason with the database of all airports code)
-     * @param airport
+     * Check the validity of an airport code by calling the identificationAPI
+     * in the case of test it will return true
+     * @param airportCode
      * @return Booleans
      */
-    public boolean CheckAirportValidity(CharSequence airport) {
+    public boolean CheckAirportValidity(CharSequence airportCode) {
         if(!test){
-            return airportBuilder.checkAirport((String) airport,formPage.getApplicationContext());
+            return airportBuilder.checkAirport((String) airportCode, formPage.getApplicationContext());
         }
         else return true;
     }
