@@ -109,7 +109,7 @@ public class FormController {
      */
     public boolean CheckAirportValidity(CharSequence airportCode) {
         if(!test){
-            return airportBuilder.checkAirport((String) airportCode, formPage.getApplicationContext());
+            return airportBuilder.checkAirport(airportCode.toString(), formPage.getApplicationContext());
         }
         else return true;
     }

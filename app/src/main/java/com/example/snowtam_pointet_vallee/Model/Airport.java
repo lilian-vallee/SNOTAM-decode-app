@@ -6,8 +6,6 @@ import android.util.Log;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -19,7 +17,7 @@ public class Airport implements java.io.Serializable{
 
     private String codeICAO;
     private String snowtamOriginal; // SNOWTAM undecoded
-    private String snowtamDecode; // SNOWTAM decoded
+    private String snowtamDecoded; // SNOWTAM decoded
     private String airportName = "default name";
     private double[] coordonates; // coordonates ==> longitude, latitude
 
@@ -54,7 +52,7 @@ public class Airport implements java.io.Serializable{
     }
 
     public String getSnowtamDecode() {
-        return snowtamDecode;
+        return snowtamDecoded;
     }
 
     public String getAirportName() {
@@ -70,51 +68,103 @@ public class Airport implements java.io.Serializable{
     public void decode() {
 
         if(snowtamOriginal == null){
-            snowtamDecode = " ";
+            snowtamDecoded = " ";
         }
         else{
             String snowtam = snowtamOriginal;
-            snowtam = decodeA(snowtam);
-            snowtam = decodeB(snowtam);
 
-            Log.i("Airport", "New decoded SNOWTAM : "+ snowtam);
+            //formatage du snowtam pour traitement
+            snowtam = snowtam.replace(")",") ");
+            snowtam = snowtam.replaceAll("\\s+"," ");
+            String[] indexSnowtam = snowtam.split(" ");
 
-            snowtamDecode = snowtam;
+
+            indexSnowtam = decodeA(indexSnowtam);
+            indexSnowtam = decodeB(indexSnowtam);
+            //indexSnowtam = decodeRunway(indexSnowtam);
+
+
+
+            snowtamDecoded = indexSnowtam[0];
+            for (int i = 1 ; i<indexSnowtam.length ; i++){
+                snowtamDecoded = snowtamDecoded +" "+ indexSnowtam[i];
+            }
+
+
+            Log.i("Airport", snowtamDecoded);
         }
     }
 
-    private String decodeA(String snowtam) {
+    private String[] decodeA(String[] indexSnowtam) {
 
-        int begin = snowtam.indexOf("A)") +2;
-        int end = snowtam.indexOf("B)");
+        indexSnowtam[0] = indexSnowtam[0] +" ";
 
-        snowtam = snowtam.replace(snowtam.substring(begin,end), " "+ airportName +"\n");
+        indexSnowtam[1] = this.airportName;
 
-        return snowtam;
+        return indexSnowtam;
     }
 
-    private String decodeB(String snowtam) {
+    private String[] decodeB(String[] indexSnowtam) {
 
         try {
 
-            int begin = snowtam.indexOf("B)") +2;
-            int end = snowtam.indexOf("C)");
+            for (int i = 1 ; i < indexSnowtam.length; i++){
 
-            String dateStr = snowtam.substring(begin,end);
-            dateStr = dateStr.replaceAll("\\s", "");
+                if (indexSnowtam[i].equals("B)")){
 
-            Date date = new SimpleDateFormat("MMddkkmm").parse(dateStr);
+                    indexSnowtam[i] = "\n"+ indexSnowtam[i] +" ";
 
-            Log.d("Debug", dateStr +"\t"+ date);
+                    String dateStr = indexSnowtam[i+1];
 
-            DateFormat dateFormat = new SimpleDateFormat("d MMM kk'h'mm z");
-            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    Date date = new SimpleDateFormat("MMddkkmm").parse(dateStr);
 
-            snowtam = snowtam.replace(snowtam.substring(begin,end), " "+ dateFormat.format(date) +"\n");
+                    DateFormat dateFormat = new SimpleDateFormat("d MMM kk'h'mm z");
+                    dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
+                    indexSnowtam[i+1] = dateFormat.format(date);
+                    i++;
+                }
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return snowtam;
+        return indexSnowtam;
     }
+
+//    private String decodeRunway(String snowtam) {
+//
+//        String snowtamAlt = snowtam;
+//
+//        while(snowtamAlt.contains("C)")){
+//
+//            int begin = snowtamAlt.indexOf("C)");
+//            int end = snowtamAlt.split(" ");
+//
+//            String value = snowtamAlt.substring(begin,end);
+//            snowtamAlt = snowtamAlt.replace(value,"");
+//
+//            value = value.replaceAll("\\s","");
+//            if(value.length()==2){
+//                if(value.equals("88")){
+//                    value = "ALL RUNWAYS";
+//                }
+//                else{
+//                    value = "RUNWAY "+ value;
+//                }
+//            }
+//            else{
+//                if(value.contains("R")){
+//                    value = "RUNWAY "+ Integer.valueOf(value.substring(0,2))+50;
+//                }
+//                else{
+//                    value = "RUNWAY "+ Integer.valueOf(value.substring(0,2));
+//                }
+//            }
+//
+//            snowtam = snowtam.replace(snowtam.substring(begin+2,end), " "+ value +" ");
+//
+//        }
+//
+//        return snowtam;
+//    }
 }

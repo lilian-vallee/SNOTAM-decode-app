@@ -29,7 +29,7 @@ public class AirportAPI {
      */
     public Airport request(String url, Context context) {
 
-        final InputStream[] in = new InputStream[1];// needed for Volley
+        final Airport[] airport = new Airport[1]; //needed for Volley
 
         Log.i("FormulairePage", "Sending identification Request ...");
 
@@ -43,7 +43,7 @@ public class AirportAPI {
                     @Override
                     public void onResponse(String response) {
 
-                        in[0] = new ByteArrayInputStream(response.getBytes());
+                        airport[0] = ResponseParser(new ByteArrayInputStream(response.getBytes()));
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -53,7 +53,7 @@ public class AirportAPI {
         });
         queue.add(stringRequest);
 
-        return ResponseParser(in[0]);
+        return airport[0];
     }
 
     /**
