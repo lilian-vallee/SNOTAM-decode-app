@@ -20,42 +20,32 @@ public class ResultPage extends AppCompatActivity {
 
     HashMap<Integer, Airport> listSnowtam = new HashMap<>();
 
-    public int getListSize() {
-        return listSnowtam.size();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-/*
-        org.osmdroid.config.IConfigurationProvider osmConf = org.osmdroid.config.Configuration.getInstance();
-        File basePath = new File(getCacheDir().getAbsolutePath(), "osmdroid");
-        osmConf.setOsmdroidBasePath(basePath);
-        File tileCache = new File(osmConf.getOsmdroidBasePath().getAbsolutePath(), "tile");
-        osmConf.setOsmdroidTileCache(tileCache);
-*/
-
+        /**
+         * here we change property of application so map tile will be charge localy and not in an extern stockage anymore
+         * without this, the map will not load tiles
+         */
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
 
+
         setContentView(R.layout.activity_resultpage);
 
-
-        Bundle bundle = this.getIntent().getExtras();
+        Bundle bundle = this.getIntent().getExtras();       //we take data send by controller when switch activity
         if(bundle != null) {
             listSnowtam = (HashMap<Integer, Airport>) bundle.getSerializable("answersList");
         }
 
         ViewPager viewPager = (ViewPager)findViewById(R.id.view_pager);
-        viewPager.setOffscreenPageLimit(1);
+        viewPager.setOffscreenPageLimit(listSnowtam.size());        //number of page load initialy and keep in memory by the app
         SwipeAdapter swipeAdapter = new SwipeAdapter(getSupportFragmentManager(),listSnowtam);
         viewPager.setAdapter(swipeAdapter);
-        viewPager.setCurrentItem(0);
-
+        viewPager.setCurrentItem(0);            //will show the fisrt page
     }
 }
