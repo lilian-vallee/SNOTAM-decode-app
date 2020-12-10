@@ -19,7 +19,7 @@ public class FormController {
     //Attributs
     //=====================================
 
-    protected Boolean test = true; // trigger (true) or not (false) all API call.
+    protected Boolean test = false; // trigger (true) or not (false) all API call.
 
     private Formulaire formPage;
     private ArrayList<CharSequence> airportsList = new ArrayList<>();
@@ -40,9 +40,10 @@ public class FormController {
 
     /**
      * Constructor
+     *
      * @param formPage
      */
-    public FormController(Formulaire formPage){
+    public FormController(Formulaire formPage) {
         this.formPage = formPage;
 
         airportBuilder = new AirportBuilder();
@@ -59,27 +60,24 @@ public class FormController {
      */
     public void RequeteAPI() {
 
-        if (!test){
+        if (!test) {
             SwitchActivity(airportBuilder.getAirports());
-        }
-        else{
+        } else {
             SwitchActivity(airportBuilder.airportTest(formPage.getApplicationContext()));
         }
 
     }
 
-
-
     private void SwitchActivity(HashMap<Integer, Airport> answers) {
 
-        Log.i("FormulairePage","Initialise Bundle");
+        Log.i("FormulairePage", "Initialise Bundle");
 
         Intent intent = new Intent(formPage.getApplicationContext(), ResultPage.class);
         Bundle extras = new Bundle();
 
-        Log.i("FormulairePage", "Loading "+ answers.size() +" aiports.");
+        Log.i("FormulairePage", "Loading " + answers.size() + " aiports.");
 
-        extras.putSerializable("answersList",answers);
+        extras.putSerializable("answersList", answers);
         intent.putExtras(extras);
 
         Log.i("FormulairePage", "Switching activity");
@@ -89,30 +87,44 @@ public class FormController {
 
     /**
      * Add an aiport to the airportList once they are checked
+     *
      * @param airport
      * @return booleans
      */
     public boolean addAirport(CharSequence airport) {
-        if(CheckAirportValidity(airport)) {
+        if (CheckAirportValidity(airport)) {
             airportsList.add(airport);
             return true;
         }
         return false;
     }
 
-
     /**
      * Check the validity of an airport code by calling the identificationAPI
      * in the case of test it will return true
+     *
      * @param airportCode
      * @return Booleans
      */
     public boolean CheckAirportValidity(CharSequence airportCode) {
-        if(!test){
-            return airportBuilder.checkAirport(airportCode.toString(), formPage.getApplicationContext());
+        if (!test) {
+            if (airportCode.length() != 4) {
+                return false;
+            }
+            else if (airportCode.toString().matches("[a-z]+")) {
+                return false;
+            } else if (airportCode.toString().startsWith("I")) {
+                return false;
+            } else if (airportCode.toString().startsWith("J")) {
+                return false;
+            } else if (airportCode.toString().startsWith("X")) {
+                return false;
+            } else {
+                airportBuilder.checkAirport(airportCode.toString(), formPage.getApplicationContext());
+                return true;
+            }
+        } else {
+            return true;
         }
-        else return true;
     }
-
-
 }

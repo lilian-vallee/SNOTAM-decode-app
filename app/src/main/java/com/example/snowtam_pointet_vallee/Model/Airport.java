@@ -18,7 +18,7 @@ public class Airport implements java.io.Serializable{
     private String codeICAO;
     private String snowtamOriginal; // SNOWTAM undecoded
     private String snowtamDecoded; // SNOWTAM decoded
-    private String airportName = "default name";
+    private String airportName;
     private double[] coordonates; // coordonates ==> longitude, latitude
 
     //=====================================

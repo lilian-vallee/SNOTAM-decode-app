@@ -25,11 +25,10 @@ public class AirportAPI {
      * Make a request to the API with an url
      * @param url
      * @param context
-     * @return Booleans
+     * @param callBack
+     * @return
      */
-    public Airport request(String url, Context context) {
-
-        final Airport[] airport = new Airport[1]; //needed for Volley
+    public void request(String url, Context context, final VolleyCallBack callBack) {
 
         Log.i("FormulairePage", "Sending identification Request ...");
 
@@ -43,7 +42,11 @@ public class AirportAPI {
                     @Override
                     public void onResponse(String response) {
 
-                        airport[0] = ResponseParser(new ByteArrayInputStream(response.getBytes()));
+                        Log.i("FormulairePage", "Response received");
+
+                        Airport airport = ResponseParser(new ByteArrayInputStream(response.getBytes()));
+
+                        callBack.onSuccess(airport);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -52,8 +55,6 @@ public class AirportAPI {
             }
         });
         queue.add(stringRequest);
-
-        return airport[0];
     }
 
     /**
@@ -109,35 +110,39 @@ public class AirportAPI {
             reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
 
             reader.beginArray();
-            reader.beginObject();
 
-            while(reader.hasNext()){
-                String attribut = reader.nextName();
+            if (reader.hasNext()){
+                reader.beginObject();
 
-                switch (attribut)
-                {
-                    case "Location_Name" :
-                        airport.setAirportName(reader.nextString());
-                        break;
-                    case "Latitude" :
-                        lattitude = reader.nextDouble();
-                        break;
-                    case "Longitude" :
-                        longitude = reader.nextDouble();
-                        break;
-                    default:
-                        reader.skipValue();
+                while(reader.hasNext()){
+                    String attribut = reader.nextName();
+
+                    switch (attribut)
+                    {
+                        case "Location_Name" :
+                            airport.setAirportName(reader.nextString());
+                            break;
+                        case "Latitude" :
+                            lattitude = reader.nextDouble();
+                            break;
+                        case "Longitude" :
+                            longitude = reader.nextDouble();
+                            break;
+                        default:
+                            reader.skipValue();
+                    }
+
                 }
-
+                reader.endObject();
             }
-            reader.endObject();
-            reader.endArray();
+                reader.endArray();
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         airport.setCoordonates(new double[] {lattitude, longitude});
         return airport;
     }

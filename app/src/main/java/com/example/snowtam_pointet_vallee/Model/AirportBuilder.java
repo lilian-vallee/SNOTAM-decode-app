@@ -36,28 +36,20 @@ public class AirportBuilder {
      * if not the code are rejected
      * @param airportCode
      * @param context
-     * @return
      */
-    public boolean checkAirport(String airportCode, Context context) {
+    public void checkAirport(String airportCode, Context context) {
 
         String identifictionRequestUrl = "https://applications.icao.int/dataservices/api/doc7910?api_key=19569950-27e2-11eb-bb91-378bd10b6324&airports="+ airportCode +"&format=json";
 
         Log.i("FormulairePage", "New identification request : "+ identifictionRequestUrl);
 
-        Airport airport = airportAPI.request(identifictionRequestUrl, context);
-        if (!airport.getAirportName().equals(null)){
-
-            Log.i("FormulairePage", "Request succesfull.");
-
-            checkSnowtam(airport, airportCode, context);
-            return true;
-        }
-        else {
-
-            Log.i("FormulairePage", "Request error : ICAO iarport code rejected.");
-
-            return false;
-        }
+        airportAPI.request(identifictionRequestUrl, context, new VolleyCallBack() {
+            @Override
+            public void onSuccess(Airport airportResponse) {
+                //call when the api make a response.
+                checkSnowtam(airportResponse, airportCode, context);
+            }
+        });
     }
 
     /**
@@ -72,20 +64,22 @@ public class AirportBuilder {
             String airportCode,
             Context context)
     {
+        if(airport.getAirportName() != null){
 
-        airport.setCodeICAO(airportCode);
+            airport.setCodeICAO(airportCode);
 
-        String snowtamRequestUrl = "https://applications.icao.int/dataservices/api/notams-realtime-list?api_key=19569950-27e2-11eb-bb91-378bd10b6324&format=json&criticality=1&locations="+ airportCode;
+            String snowtamRequestUrl = "https://applications.icao.int/dataservices/api/notams-realtime-list?api_key=19569950-27e2-11eb-bb91-378bd10b6324&format=json&criticality=1&locations="+ airportCode;
 
-        Log.i("AirportBuilder", "new SNOWTAM request : "+ snowtamRequestUrl);
+            Log.i("AirportBuilder", "new SNOWTAM request : "+ snowtamRequestUrl);
 
-        String snowtam = snowtamAPI.request(snowtamRequestUrl, context);
-        airport.setSnowtamOriginal(snowtam);
-        airport.decode();
+            String snowtam = snowtamAPI.request(snowtamRequestUrl, context);
+            airport.setSnowtamOriginal(snowtam);
+            airport.decode();
 
-        Log.i("FormulairePage", "New airport entree : "+ airportCode);
+            Log.i("FormulairePage", "New airport entree : "+ airportCode);
 
-        airports.put(airports.size(),airport);
+            airports.put(airports.size(),airport);
+        }
     }
 
 
