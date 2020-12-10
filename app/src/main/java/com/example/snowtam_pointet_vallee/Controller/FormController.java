@@ -19,7 +19,7 @@ public class FormController {
     //Attributs
     //=====================================
 
-    protected Boolean test = false; // trigger (true) or not (false) all API call.
+    protected Boolean test = true; // trigger (true) or not (false) all API call.
 
     private Formulaire formPage;
     private ArrayList<CharSequence> airportsList = new ArrayList<>();

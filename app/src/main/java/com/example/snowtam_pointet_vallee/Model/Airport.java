@@ -81,7 +81,7 @@ public class Airport implements java.io.Serializable{
 
             indexSnowtam = decodeA(indexSnowtam);
             indexSnowtam = decodeB(indexSnowtam);
-            //indexSnowtam = decodeRunway(indexSnowtam);
+            indexSnowtam = decodeC(indexSnowtam);
 
 
 
@@ -108,7 +108,7 @@ public class Airport implements java.io.Serializable{
 
         try {
 
-            for (int i = 1 ; i < indexSnowtam.length; i++){
+            for (int i = 0 ; i < indexSnowtam.length; i++){
 
                 if (indexSnowtam[i].equals("B)")){
 
@@ -131,40 +131,32 @@ public class Airport implements java.io.Serializable{
         return indexSnowtam;
     }
 
-//    private String decodeRunway(String snowtam) {
-//
-//        String snowtamAlt = snowtam;
-//
-//        while(snowtamAlt.contains("C)")){
-//
-//            int begin = snowtamAlt.indexOf("C)");
-//            int end = snowtamAlt.split(" ");
-//
-//            String value = snowtamAlt.substring(begin,end);
-//            snowtamAlt = snowtamAlt.replace(value,"");
-//
-//            value = value.replaceAll("\\s","");
-//            if(value.length()==2){
-//                if(value.equals("88")){
-//                    value = "ALL RUNWAYS";
-//                }
-//                else{
-//                    value = "RUNWAY "+ value;
-//                }
-//            }
-//            else{
-//                if(value.contains("R")){
-//                    value = "RUNWAY "+ Integer.valueOf(value.substring(0,2))+50;
-//                }
-//                else{
-//                    value = "RUNWAY "+ Integer.valueOf(value.substring(0,2));
-//                }
-//            }
-//
-//            snowtam = snowtam.replace(snowtam.substring(begin+2,end), " "+ value +" ");
-//
-//        }
-//
-//        return snowtam;
-//    }
+    private String[] decodeC(String[] indexSnowtam) {
+
+        for (int i = 0 ; i < indexSnowtam.length ; i++){
+
+            if (indexSnowtam[i].equals("C)")){
+
+                indexSnowtam[i] = "\n"+ indexSnowtam[i] + " ";
+
+                if (indexSnowtam[i+1].equals("88")){
+                    indexSnowtam[i+1] = "ALL RUNWAYS";
+                }
+                else if (indexSnowtam[i+1].length() == 2){
+                    indexSnowtam[i+1] = "RUNWAY " + indexSnowtam[i+1] + " ";
+                }
+                else {
+                    if (indexSnowtam[i+1].contains("R")){
+                        indexSnowtam[i+1] = "RUNWAY "+ Integer.valueOf(indexSnowtam[i+1].substring(0,1))+50 +" ";
+                    }
+                    else {
+                        indexSnowtam[i+1] = "RUNWAY "+ indexSnowtam[i+1] +" ";
+                    }
+                }
+                i++;
+            }
+
+        }
+        return indexSnowtam;
+    }
 }
