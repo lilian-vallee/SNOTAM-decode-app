@@ -34,10 +34,12 @@ public class FragmentPage extends Fragment {
 
         final View view;
         Bundle bundle = getArguments();
+        int thisPage = bundle.getInt("pageNumber") + 1;
+        int numberPages = bundle.getInt("numberPage");
         String name = bundle.getString("airportName");          //get the airport name
         String data = bundle.getString("data");                 //get the airport snowtan
         String decodeData = bundle.getString("decodeData");     //get the decode snowtam
-        double position [] = (double[]) bundle.get("coordonates");   //get the airport coordonates
+        double location [] = (double[]) bundle.get("coordonates");   //get the airport coordonates
 
 
         view = inflater.inflate(R.layout.activity_resultpage,container,false);      //initiate the view
@@ -45,6 +47,8 @@ public class FragmentPage extends Fragment {
         textName.setText(name);                                                                 //set airport name
         TextView textData = (TextView) view.findViewById(R.id.show_data);                   //get item show_data
         textData.setText(data);                                                                 //set snowtam
+        TextView position = (TextView) view.findViewById(R.id.position);                    //get item position
+        position.setText(thisPage + " / " + numberPages);                                       //set position
 
 
 
@@ -52,7 +56,7 @@ public class FragmentPage extends Fragment {
         myOpenMapView.setBuiltInZoomControls(true);                                         //initiate map
         myOpenMapView.setClickable(true);
         myOpenMapView.getController().setZoom(14);
-        myOpenMapView.getController().setCenter(new GeoPoint(position[0], position[1]));
+        myOpenMapView.getController().setCenter(new GeoPoint(location[0], location[1]));
 
         map_visibilityON = view.findViewById(R.id.show_map);
         map_visibilityON.setVisibility(View.VISIBLE);

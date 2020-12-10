@@ -30,6 +30,7 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
 
         Bundle bundle = new Bundle();           //this bundle is use to share data we need with fragment page
         bundle.putInt("pageNumber",position);   //depending of the page we want to show
+        bundle.putInt("numberPage",getCount()); //the number of differents pages
         //System.out.println("position " + position);
 
         bundle.putString("data", (String) ((Airport) listSnowtam.get(position)).getSnowtamOriginal());
