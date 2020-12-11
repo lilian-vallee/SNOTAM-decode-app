@@ -9,4 +9,5 @@
     <string name="sendCode">envoyer les codes</string>#
     <string name="show_map">montrer la map</string>
     <string name="hide_map">cacher la map</string>
+    <string name="toast_codeError">erreur dans le code entré</string>
 </resources>
