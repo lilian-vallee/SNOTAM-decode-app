@@ -171,10 +171,10 @@ public class Airport implements java.io.Serializable{
                 }
                 else {
                     if (indexSnowtam[i+1].contains("R")){
-                        indexSnowtam[i+1] = "RUNWAY "+ Integer.valueOf(indexSnowtam[i+1].substring(0,1))+50 +" ";
+                        indexSnowtam[i+1] = "RUNWAY "+ (Integer.valueOf(indexSnowtam[i+1].substring(0,2))+50) +" ";
                     }
                     else {
-                        indexSnowtam[i+1] = "RUNWAY "+ indexSnowtam[i+1] +" ";
+                        indexSnowtam[i+1] = "RUNWAY "+ indexSnowtam[i+1].substring(0,2) +" ";
                     }
                 }
                 i++;
