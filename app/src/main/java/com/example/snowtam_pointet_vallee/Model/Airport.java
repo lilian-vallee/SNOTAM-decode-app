@@ -65,6 +65,10 @@ public class Airport implements java.io.Serializable{
     //Methodes
     //=====================================
 
+
+    /**
+     * Methode which initialise the process of decoding the SNOWTAM
+     */
     public void decode() {
 
         if(snowtamOriginal == null){
@@ -95,6 +99,11 @@ public class Airport implements java.io.Serializable{
         }
     }
 
+    /**
+     * Decode the A entree of a SNOWTAM which is the ICAO code to the actual airport name.
+     * @param indexSnowtam
+     * @return
+     */
     private String[] decodeA(String[] indexSnowtam) {
 
         indexSnowtam[0] = indexSnowtam[0] +" ";
@@ -104,6 +113,11 @@ public class Airport implements java.io.Serializable{
         return indexSnowtam;
     }
 
+    /**
+     * Decode the B entree of a SNOWTAM which is a date in the MMddkkmm to d MMM kkmm z (11080850 ==> 11 august 08h50 UTC)
+     * @param indexSnowtam
+     * @return
+     */
     private String[] decodeB(String[] indexSnowtam) {
 
         try {
@@ -131,6 +145,11 @@ public class Airport implements java.io.Serializable{
         return indexSnowtam;
     }
 
+    /**
+     * Decode the C entree of a SNOWTAM which is the number of the runway.
+     * @param indexSnowtam
+     * @return
+     */
     private String[] decodeC(String[] indexSnowtam) {
 
         for (int i = 0 ; i < indexSnowtam.length ; i++){
