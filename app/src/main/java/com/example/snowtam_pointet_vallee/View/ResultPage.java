@@ -16,6 +16,7 @@ import org.osmdroid.config.Configuration;
 
 import java.util.HashMap;
 
+
 public class ResultPage extends AppCompatActivity {
 
     HashMap<Integer, Airport> listSnowtam = new HashMap<>();
@@ -32,8 +33,7 @@ public class ResultPage extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-
-
+        
 
         setContentView(R.layout.activity_resultpage);
 

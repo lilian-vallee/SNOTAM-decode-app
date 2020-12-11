@@ -1,12 +1,10 @@
 package com.example.snowtam_pointet_vallee.View;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +16,6 @@ import com.example.snowtam_pointet_vallee.R;
 public class Formulaire extends AppCompatActivity {
 
     FormController controller = new FormController(this);                                   //create the controller
-
-    Intent formulaire = getIntent();
 
     TextView airport;           //where the user write the airport's code he wants
 
@@ -58,16 +54,15 @@ public class Formulaire extends AppCompatActivity {
                 }
                 else {                                                  //if check isn't ok
                     Context context = getApplicationContext();
-                    CharSequence text = "Le code " +
+                    CharSequence text = "code " +
                             airportCode +
-                            " n'est pas valide";
+                            " isn't good";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
 
                     airport.setTextColor(Color.RED);                    //text color to red => warning there is an error
-
                 }
             }
         });

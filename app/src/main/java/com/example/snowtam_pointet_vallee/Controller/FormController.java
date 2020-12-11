@@ -19,7 +19,7 @@ public class FormController {
     //Attributs
     //=====================================
 
-    protected Boolean test = true; // trigger (true) or not (false) all API call.
+    protected Boolean test = false; // trigger (true) or not (false) all API call.
 
     private Formulaire formPage;
     private ArrayList<CharSequence> airportsList = new ArrayList<>();
@@ -68,6 +68,11 @@ public class FormController {
 
     }
 
+    /**
+     * Send the user to the result, so he can see the snowtam
+     *
+     * @param answers
+     */
     private void SwitchActivity(HashMap<Integer, Airport> answers) {
 
         Log.i("FormulairePage", "Initialise Bundle");
