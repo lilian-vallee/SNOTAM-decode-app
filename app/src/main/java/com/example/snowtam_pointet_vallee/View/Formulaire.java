@@ -70,7 +70,14 @@ public class Formulaire extends AppCompatActivity {
         show_result.setOnClickListener(new View.OnClickListener() {     //click on the button V
             @Override
             public void onClick(View v) {
-                controller.RequeteAPI();
+
+                if(!controller.RequeteAPI()){
+                    CharSequence text = "Loading airport ...";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                    toast.show();
+                }
             }
         });
 

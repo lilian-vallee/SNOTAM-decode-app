@@ -57,8 +57,9 @@ public class FormController {
     /**
      * Take all the airports initialized in the aiportBuilder for switching activity
      * if test are enable the SwitchActivity methode take what the airportTest methode of the aiportBuilder send him
+     * @return
      */
-    public void RequeteAPI() {
+    public boolean RequeteAPI() {
 
         Boolean isReady = false;
 
@@ -68,7 +69,7 @@ public class FormController {
             }
             else{
                 isReady = false;
-                break;
+                return false;
             }
         }
 
@@ -79,8 +80,7 @@ public class FormController {
                 SwitchActivity(airportBuilder.airportTest(formPage.getApplicationContext()));
             }
         }
-
-
+        return true;
     }
 
     /**
