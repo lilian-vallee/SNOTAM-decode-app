@@ -9,4 +9,6 @@
     <string name="sendCode">send code</string>
     <string name="show_map">show map</string>
     <string name="hide_map">hide map</string>
+    <string name="toast_codeError">error with the code</string>
+    <string name="toast_codeLoad">Loading airport ...</string>
 </resources>

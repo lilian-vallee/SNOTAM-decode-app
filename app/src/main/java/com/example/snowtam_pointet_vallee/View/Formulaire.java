@@ -15,7 +15,7 @@ import com.example.snowtam_pointet_vallee.R;
 
 public class Formulaire extends AppCompatActivity {
 
-    FormController controller = new FormController(this);                                   //create the controller
+    FormController controller = new FormController(this);   //create the controller
 
     TextView airport;           //where the user write the airport's code he wants
 
@@ -24,13 +24,15 @@ public class Formulaire extends AppCompatActivity {
     Button show_result;    //go to the next page whit results
     Button addAirport;     //add the code to a list which is used to show results
 
+    Boolean checked = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulaire);
 
         /***
-         * we use the findViewById method to link the xml object whit the code
+         * we use the findViewById method to link the xml object's id whit the code
          */
         airport = findViewById(R.id.airport1);
 
@@ -54,9 +56,8 @@ public class Formulaire extends AppCompatActivity {
                 }
                 else {                                                  //if check isn't ok
                     Context context = getApplicationContext();
-                    CharSequence text = "code " +
-                            airportCode +
-                            " isn't good";
+                    CharSequence text = getResources().getString(R.string.toast_codeError);
+
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
@@ -72,7 +73,7 @@ public class Formulaire extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(!controller.RequeteAPI()){
-                    CharSequence text = "Loading airport ...";
+                    CharSequence text = getResources().getString(R.string.toast_codeLoad);
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(getApplicationContext(), text, duration);
