@@ -56,14 +56,7 @@ public class Formulaire extends AppCompatActivity {
                 }
                 else {                                                  //if check isn't ok
                     Context context = getApplicationContext();
-                    /*CharSequence text = "code " +
-                            airportCode +
-                            " isn't good";
-
-                     */
-
                     CharSequence text = getResources().getString(R.string.toast_codeError);
-
 
                     int duration = Toast.LENGTH_SHORT;
 
@@ -80,7 +73,7 @@ public class Formulaire extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(!controller.RequeteAPI()){
-                    CharSequence text = "Loading airport ...";
+                    CharSequence text = getResources().getString(R.string.toast_codeLoad);
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(getApplicationContext(), text, duration);

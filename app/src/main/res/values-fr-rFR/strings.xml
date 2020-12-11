@@ -10,4 +10,5 @@
     <string name="show_map">montrer la map</string>
     <string name="hide_map">cacher la map</string>
     <string name="toast_codeError">erreur dans le code entré</string>
+    <string name="toast_codeLoad">chargement en cours</string>
 </resources>
