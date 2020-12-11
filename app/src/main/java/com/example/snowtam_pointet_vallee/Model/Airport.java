@@ -20,8 +20,9 @@ public class Airport implements java.io.Serializable{
     private String snowtamDecoded; // SNOWTAM decoded
     private String airportName;
     private double[] coordonates; // coordonates ==> longitude, latitude
+    private Boolean isReady = false;
 
-    //=====================================
+//=====================================
     //Getters / Setters
     //=====================================
 
@@ -61,6 +62,10 @@ public class Airport implements java.io.Serializable{
 
     public double[] getCoordonates() { return coordonates; }
 
+    public Boolean getReady() {
+        return isReady;
+    }
+
     //=====================================
     //Methodes
     //=====================================
@@ -94,7 +99,7 @@ public class Airport implements java.io.Serializable{
                 snowtamDecoded = snowtamDecoded +" "+ indexSnowtam[i];
             }
 
-
+            isReady = true;
             Log.i("Airport", snowtamDecoded);
         }
     }

@@ -39,7 +39,7 @@ public class AirportBuilder {
      */
     public void checkAirport(String airportCode, Context context) {
 
-        String identifictionRequestUrl = "https://applications.icao.int/dataservices/api/doc7910?api_key=19569950-27e2-11eb-bb91-378bd10b6324&airports="+ airportCode +"&format=json";
+        String identifictionRequestUrl = "https://applications.icao.int/dataservices/api/doc7910?api_key=bb0b4b50-3b89-11eb-bd1b-5bb1d23c180e&airports="+ airportCode +"&format=json";
 
         Log.i("FormulairePage", "New identification request : "+ identifictionRequestUrl);
 
@@ -68,7 +68,7 @@ public class AirportBuilder {
 
             airport.setCodeICAO(airportCode);
 
-            String snowtamRequestUrl = "https://applications.icao.int/dataservices/api/notams-realtime-list?api_key=19569950-27e2-11eb-bb91-378bd10b6324&format=json&criticality=1&locations="+ airportCode;
+            String snowtamRequestUrl = "https://applications.icao.int/dataservices/api/notams-realtime-list?api_key=bb0b4b50-3b89-11eb-bd1b-5bb1d23c180e&format=json&criticality=1&locations="+ airportCode;
 
             Log.i("AirportBuilder", "new SNOWTAM request : "+ snowtamRequestUrl);
 

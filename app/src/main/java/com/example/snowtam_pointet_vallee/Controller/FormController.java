@@ -60,11 +60,26 @@ public class FormController {
      */
     public void RequeteAPI() {
 
-        if (!test) {
-            SwitchActivity(airportBuilder.getAirports());
-        } else {
-            SwitchActivity(airportBuilder.airportTest(formPage.getApplicationContext()));
+        Boolean isReady = false;
+
+        for (int i = 0 ; i<airportBuilder.getAirports().size() ; i++){
+            if(airportBuilder.getAirports().get((Integer) i).getReady()){
+                isReady = true;
+            }
+            else{
+                isReady = false;
+                break;
+            }
         }
+
+        if(isReady){
+            if (!test) {
+                SwitchActivity(airportBuilder.getAirports());
+            } else {
+                SwitchActivity(airportBuilder.airportTest(formPage.getApplicationContext()));
+            }
+        }
+
 
     }
 
