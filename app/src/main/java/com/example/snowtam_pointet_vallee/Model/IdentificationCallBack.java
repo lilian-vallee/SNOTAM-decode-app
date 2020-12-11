@@ -1,5 +1,5 @@
 package com.example.snowtam_pointet_vallee.Model;
 
-public interface VolleyCallBack {
+public interface IdentificationCallBack {
     void onSuccess(Airport airport);
 }

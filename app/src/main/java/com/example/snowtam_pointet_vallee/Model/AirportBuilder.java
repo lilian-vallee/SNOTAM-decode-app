@@ -43,7 +43,7 @@ public class AirportBuilder {
 
         Log.i("FormulairePage", "New identification request : "+ identifictionRequestUrl);
 
-        airportAPI.request(identifictionRequestUrl, context, new VolleyCallBack() {
+        airportAPI.request(identifictionRequestUrl, context, new IdentificationCallBack() {
             @Override
             public void onSuccess(Airport airportResponse) {
                 //call when the api make a response.
@@ -72,9 +72,13 @@ public class AirportBuilder {
 
             Log.i("AirportBuilder", "new SNOWTAM request : "+ snowtamRequestUrl);
 
-            String snowtam = snowtamAPI.request(snowtamRequestUrl, context);
-            airport.setSnowtamOriginal(snowtam);
-            airport.decode();
+            snowtamAPI.request(snowtamRequestUrl, context, new SnowtamCallback() {
+                @Override
+                public void onSuccess(String snowtam) {
+                    airport.setSnowtamOriginal(snowtam);
+                    airport.decode();
+                }
+            });
 
             Log.i("FormulairePage", "New airport entree : "+ airportCode);
 

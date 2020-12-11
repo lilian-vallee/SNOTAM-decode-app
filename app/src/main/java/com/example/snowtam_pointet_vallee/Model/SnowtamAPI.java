@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 
 
 public class SnowtamAPI {
@@ -31,12 +30,10 @@ public class SnowtamAPI {
      * Make a request to the API with an url
      * @param url
      * @param context
+     * @param callBack
      * @return Booleans
      */
-    public String request(String url, Context context) {
-
-        final String[] snowtam = new String[1]; // needed by the inner class of Volley.
-
+    public void request(String url, Context context, final SnowtamCallback callBack) {
 
         Log.i("FormulairePage", "Sending SNOWTAM Request ...");
 
@@ -51,7 +48,7 @@ public class SnowtamAPI {
                 public void onResponse(String response) {
 
                    InputStream in = new ByteArrayInputStream(response.getBytes());
-                   snowtam[0] = ResponseParser(in);
+                   callBack.onSuccess(ResponseParser(in));
                 }
             }, new Response.ErrorListener() {
             @Override
@@ -60,8 +57,6 @@ public class SnowtamAPI {
             }
         });
         queue.add(stringRequest);
-
-        return snowtam[0];
     }
 
     /**

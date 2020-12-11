@@ -28,7 +28,7 @@ public class AirportAPI {
      * @param callBack
      * @return
      */
-    public void request(String url, Context context, final VolleyCallBack callBack) {
+    public void request(String url, Context context, final IdentificationCallBack callBack) {
 
         Log.i("FormulairePage", "Sending identification Request ...");
 

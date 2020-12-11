@@ -115,10 +115,10 @@ public class FormController {
         if (!test) {
             if (airportCode.length() != 4) {
                 return false;
-            }
-            else if (airportCode.toString().matches("[a-z]+")) {
+            } else if (airportCode.toString().matches("[a-z]+")){
                 return false;
-            } else if (airportCode.toString().startsWith("I")) {
+            }
+            else if (airportCode.toString().startsWith("I")) {
                 return false;
             } else if (airportCode.toString().startsWith("J")) {
                 return false;
@@ -128,7 +128,8 @@ public class FormController {
                 airportBuilder.checkAirport(airportCode.toString(), formPage.getApplicationContext());
                 return true;
             }
-        } else {
+        }
+        else {
             return true;
         }
     }
